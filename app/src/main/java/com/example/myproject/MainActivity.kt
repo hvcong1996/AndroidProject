@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.nicknameText.setOnClickListener {
-            updateNickname(it)
+            updateNickname()
         }
     }
 
@@ -31,26 +31,32 @@ class MainActivity : AppCompatActivity() {
     private fun addNickName(view: View){
 
         binding.apply {
-            myName?.nickname = nicknameEdit.text.toString()
-            //invalidateAll()
+            myName?.name = nicknameEdit.text.toString()
+            nicknameText.text = nicknameEdit.text.toString()
+            invalidateAll()
+
             nicknameEdit.visibility = View.GONE
-            nicknameText.visibility = View.GONE
+            nicknameText.visibility = View.VISIBLE
+            btnDone.visibility = View.GONE // GONE item truyen vao, item o day la button
         }
-        view.visibility = View.GONE // GONE item truyen vao, item o day la button
 
         // Hide the keyboard.
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    private fun updateNickname (view: View) {
+    private fun updateNickname () {
         binding.apply {
+            // myName?.name = nicknameText.text.toString()
+            myName?.name = "Hello" // Test data
+            invalidateAll()
+
             nicknameEdit.visibility = View.VISIBLE
             btnDone.visibility = View.VISIBLE
+            nicknameText.visibility = View.GONE
             // Set the focus to the edit text.
             nicknameEdit.requestFocus()
         }
-        view.visibility = View.GONE
 
         // Show the keyboard.
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
